@@ -1,22 +1,21 @@
 <?php
 /**
- * Task fixtures.
+ * Event fixtures.
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
-use App\Entity\Tag;
-use App\Entity\Task;
+use App\Entity\Enum\EventStatus;
+use App\Entity\Event;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class EventFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class EventFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -31,24 +30,26 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
-                    $this->faker->dateTimeBetween('-100 days', '-1 days')
-                )
-            );
-            $task->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
-                    $this->faker->dateTimeBetween('-100 days', '-1 days')
-                )
-            );
+        $this->createMany(10, 'events', function (int $i) {
+            $event = new Event();
+            $event->setTitle($this->faker->sentence);
+            $event->setStartDate($this->faker->dateTime);
+            $event->setEndDate($this->faker->dateTime);
+
+          //  $event->setStartDate(
+           //     DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+50 days'))
+
+          //  );
+          //  $event->setEndDate(
+         //       DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+70 days'))
+          //  );
+
+
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
+            $event->setCategory($category);
 
-            return $task;
+            return $event;
         });
 
         $this->manager->flush();

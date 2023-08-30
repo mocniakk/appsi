@@ -1,22 +1,23 @@
 <?php
 /**
- * Task entity.
+ * Event entity.
  */
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
-use DateTimeImmutable;
+use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+
 
 /**
- * Class Task.
+ * Class Event.
  *
  * @psalm-suppress MissingConstructor
  */
-#[ORM\Entity(repositoryClass: TaskRepository::class)]
-#[ORM\Table(name: 'tasks')]
-class Task
+#[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\Table(name: 'events')]
+class Event
 {
     /**
      * Primary key.
@@ -29,24 +30,18 @@ class Task
     private ?int $id = null;
 
     /**
-     * Created at.
-     *
-     * @var DateTimeImmutable|null
-     *
-     * @psalm-suppress PropertyNotSetInConstructor
+     * Start date.
      */
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?DateTimeImmutable $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTime $startDate;
+
 
     /**
-     * Updated at.
-     *
-     * @var DateTimeImmutable|null
-     *
-     * @psalm-suppress PropertyNotSetInConstructor
+     * End date.
      */
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?DateTimeImmutable $updatedAt;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTime $endDate;
+
 
     /**
      * Title.
@@ -56,7 +51,6 @@ class Task
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
-// ...
     /**
      * Category.
      *
@@ -65,7 +59,6 @@ class Task
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
-// ...
 
     /**
      * Getter for Id.
@@ -78,43 +71,38 @@ class Task
     }
 
     /**
-     * Getter for created at.
+     * Getter for start date.
      *
-     * @return DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getStartDate(): ?DateTime
     {
-        return $this->createdAt;
+        return $this->startDate;
     }
 
     /**
-     * Setter for created at.
-     *
-     * @param DateTimeImmutable|null $createdAt Created at
+     * Setter for start date.
      */
-    public function setCreatedAt(?DateTimeImmutable $createdAt): void
+    public function setStartDate(\DateTime $startDate): void
     {
-        $this->createdAt = $createdAt;
+        $this->startDate = $startDate;
     }
 
     /**
-     * Getter for updated at.
+     * Getter for end date.
      *
-     * @return DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getEndDate(): ?DateTime
     {
-        return $this->updatedAt;
+        return $this->endDate;
     }
 
     /**
-     * Setter for updated at.
+     * Setter for end date.
      *
-     * @param DateTimeImmutable|null $updatedAt Updated at
      */
-    public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
+    public function setEndDate(\DateTime $endDate): void
     {
-        $this->updatedAt = $updatedAt;
+        $this->endDate = $endDate;
     }
 
     /**
@@ -137,15 +125,26 @@ class Task
         $this->title = $title;
     }
 
+    /**
+     * Getter for category.
+     *
+     * @return Category|null Category
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category Category
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
         return $this;
     }
+
 }

@@ -5,8 +5,11 @@
 
 namespace App\Service;
 
-use App\Repository\CategoryRepository;
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
+use App\Repository\EventRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -16,9 +19,14 @@ use Knp\Component\Pager\PaginatorInterface;
 class CategoryService implements CategoryServiceInterface
 {
     /**
-     * Task repository.
+     * Category repository.
      */
     private CategoryRepository $categoryRepository;
+
+    /**
+     * Event Repository.
+     */
+    private EventRepository $eventRepository;
 
     /**
      * Paginator.
@@ -28,12 +36,14 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Constructor.
      *
-     * @param CategoryRepository     $categoryRepository Category repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param PaginatorInterface $paginator          Paginator
+     * @param EventRepository     $eventRepository     Event repository
      */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, EventRepository $eventRepository)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->eventRepository = $eventRepository;
         $this->paginator = $paginator;
     }
 
@@ -60,11 +70,48 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if ($category->getId() == null) {
-            $category->setCreatedAt(new \DateTimeImmutable());
-        }
-        $category->setUpdatedAt(new \DateTimeImmutable());
-
         $this->categoryRepository->save($category);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Category $category Category entity
+     */
+    public function delete(Category $category): void
+    {
+        $this->categoryRepository->delete($category);
+    }
+
+    /**
+     * Can Category be deleted?
+     *
+     * @param Category $category Category entity
+     *
+     * @return bool Result
+     */
+    public function canBeDeleted(Category $category): bool
+    {
+        try {
+            $result = $this->eventRepository->countByCategory($category);
+
+            return !($result > 0);
+        } catch (NoResultException|NonUniqueResultException) {
+            return false;
+        }
+    }
+
+    /**
+     * Find by id.
+     *
+     * @param int $id Category id
+     *
+     * @return Category|null Category entity
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findOneById(int $id): ?Category
+    {
+        return $this->categoryRepository->findOneById($id);
     }
 }

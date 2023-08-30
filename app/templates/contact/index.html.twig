@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.category_list'|trans }}
+    {{ 'title.contact_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.category_list'|trans }}</h1>
+    <h1>{{ 'title.contact_list'|trans }}</h1>
 
-    <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
+    <a href="{{ url('contact_create') }}" title="{{ 'action.create'|trans }}">
         {{ 'action.create'|trans }}
     </a>
 
     <div>
         {% include 'default/_flash_messages.html.twig' %}
     </div>
+
 
     {% if pagination is defined and pagination.items|length %}
 
@@ -24,26 +25,33 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'category.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'contact.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'contact.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.email'|trans, 'contact.email') }}</th>
+                <th>{{ 'label.phoneNumber'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for category in pagination.items %}
+            {% for contact in pagination.items %}
                 <tr>
-                    <td>{{ category.id }}</td>
-                    <td>{{ category.title }}</td>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phonenumber }}</td>
+
                     <td>
-                        <a class="btn btn-outline-primary" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-outline-primary" href="{{ url('contact_show', {id: contact.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
-                        <a class="btn btn-outline-success" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-outline-success" href="{{ url('contact_edit', {id: contact.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
-                        <a class="btn btn-outline-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
+                        <a class="btn btn-outline-danger" href="{{ url('contact_delete', {id: contact.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
+
+
                     </td>
                 </tr>
             {% endfor %}

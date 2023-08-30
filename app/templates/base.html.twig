@@ -12,6 +12,19 @@
     {% endblock %}
 </head>
 <body>
+<nav class="navbar text-uppercase align-items-start">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('event_index') }}">{{ 'label.event' |trans }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('contact_index') }}">{{ 'label.contact' |trans }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('category_index') }}">{{ 'label.category' |trans }}</a>
+        </li>
+    </ul>
+</nav>
 <main role="main" class="container-fluid">
     {% block body %}{% endblock %}
 </main>

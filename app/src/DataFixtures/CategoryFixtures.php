@@ -6,7 +6,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use DateTimeImmutable;
 
 /**
  * Class CategoryFixtures.
@@ -23,21 +22,9 @@ class CategoryFixtures extends AbstractBaseFixtures
      */
     public function loadData(): void
     {
-        $this->createMany(20, 'categories', function (int $i) {
+        $this->createMany(5, 'categories', function () {
             $category = new Category();
             $category->setTitle($this->faker->unique()->word);
-            $category->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
-                    $this->faker->dateTimeBetween('-100 days', '-1 days')
-                )
-            );
-            $category->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
-                    $this->faker->dateTimeBetween('-100 days', '-1 days')
-                )
-            );
-
-            $category->setSlug($this->faker->unique()->word);
 
 
             return $category;
