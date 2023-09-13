@@ -8,7 +8,6 @@ namespace App\Service;
 use App\Entity\Event;
 use App\Repository\EventRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -36,8 +35,8 @@ class EventService implements EventServiceInterface
      * Constructor.
      *
      * @param CategoryServiceInterface $categoryService Category service
-     * @param EventRepository     $eventRepository Event repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param EventRepository          $eventRepository Event repository
+     * @param PaginatorInterface       $paginator       Paginator
      */
     public function __construct(CategoryServiceInterface $categoryService, EventRepository $eventRepository, PaginatorInterface $paginator)
     {
@@ -49,8 +48,8 @@ class EventService implements EventServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
-     * * @param array<string, int> $filters Filters array
+     * @param int                $page    Page number
+     * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
      *
@@ -59,12 +58,14 @@ class EventService implements EventServiceInterface
     public function getPaginatedList(int $page, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
             $this->eventRepository->queryAll($filters),
             $page,
             EventRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
     /**
      * Save entity.
      *
@@ -106,5 +107,4 @@ class EventService implements EventServiceInterface
 
         return $resultFilters;
     }
-
 }

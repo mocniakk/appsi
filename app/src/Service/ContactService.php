@@ -28,8 +28,8 @@ class ContactService implements ContactServiceInterface
     /**
      * Constructor.
      *
-     * @param ContactRepository     $contactRepository Contact repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param ContactRepository  $contactRepository Contact repository
+     * @param PaginatorInterface $paginator         Paginator
      */
     public function __construct(ContactRepository $contactRepository, PaginatorInterface $paginator)
     {
@@ -72,5 +72,4 @@ class ContactService implements ContactServiceInterface
     {
         $this->contactRepository->delete($contact);
     }
-
 }

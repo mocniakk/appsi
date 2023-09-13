@@ -69,24 +69,6 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
-     * Apply filters to paginated list.
-     *
-     * @param QueryBuilder $queryBuilder Query builder
-     * @param array<string, object> $filters Filters array
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
-    {
-        if (isset($filters['category']) && $filters['category'] instanceof Category) {
-            $queryBuilder->andWhere('category = :category')
-                ->setParameter('category', $filters['category']);
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
      * Count events by category.
      *
      * @param Category $category Category
@@ -130,6 +112,41 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find ongoing events.
+     *
+     * @param \DateTimeInterface $now Now
+     *
+     * @return Event[] Returns an array of Event objects
+     */
+    public function findOngoingEvents(\DateTimeInterface $now): array
+    {
+        return $this->createQueryBuilder('event')
+            ->Where('event.startDate <= :now')
+            ->andWhere('event.endDate >= :now')
+            ->setParameter('now', $now)
+            ->orderBy('event.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Find future events.
+     *
+     * @param \DateTimeInterface $now Now
+     *
+     * @return Event[] Returns an array of Event objects
+     */
+    public function findFutureEvents(\DateTimeInterface $now): array
+    {
+        return $this->createQueryBuilder('event')
+            ->where('event.startDate > :now')
+            ->setParameter('now', $now)
+            ->orderBy('event.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param QueryBuilder|null $queryBuilder Query builder
@@ -139,5 +156,23 @@ class EventRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('event');
+    }
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        return $queryBuilder;
     }
 }

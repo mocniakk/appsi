@@ -100,10 +100,11 @@ class Contact
 
     /**
      * Setter for email.
+     *
+     * @param string|null $email Email
      */
     public function setEmail(string $email): void
     {
         $this->email = $email;
     }
-
 }

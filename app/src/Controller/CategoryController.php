@@ -33,12 +33,14 @@ class CategoryController extends AbstractController
 
     /**
      * Constructor.
+     *
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param TranslatorInterface      $translator      Translator
      */
-    public function __construct(CategoryServiceInterface $eventService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
-        $this->categoryService = $eventService;
+        $this->categoryService = $categoryService;
         $this->translator = $translator;
-
     }
 
     /**
@@ -107,13 +109,13 @@ class CategoryController extends AbstractController
     }
 
     /**
-    * Edit action.
-    *
-    * @param Request  $request  HTTP request
-    * @param Category $category Category entity
-    *
-    * @return Response HTTP response
-    */
+     * Edit action.
+     *
+     * @param Request  $request  HTTP request
+     * @param Category $category Category entity
+     *
+     * @return Response HTTP response
+     */
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, Category $category): Response
     {

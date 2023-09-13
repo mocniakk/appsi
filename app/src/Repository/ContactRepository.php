@@ -7,8 +7,6 @@ namespace App\Repository;
 
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -59,7 +57,6 @@ class ContactRepository extends ServiceEntityRepository
             ->orderBy('contact.id', 'DESC');
     }
 
-
     /**
      * Save entity.
      *
@@ -93,5 +90,4 @@ class ContactRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('contact');
     }
-
 }

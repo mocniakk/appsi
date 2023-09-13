@@ -16,7 +16,8 @@ interface EventServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                $page    Page number
+     * @param array<string, int> $filters Filters array
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -44,7 +45,4 @@ interface EventServiceInterface
      * @return array<string, object> Result array of filters
      */
     public function prepareFilters(array $filters): array;
-
-
-
 }

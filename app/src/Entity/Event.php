@@ -7,8 +7,6 @@ namespace App\Entity;
 
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
-
 
 /**
  * Class Event.
@@ -21,8 +19,6 @@ class Event
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,26 +31,20 @@ class Event
     #[ORM\Column(type: 'datetime')]
     private ?\DateTime $startDate;
 
-
     /**
      * End date.
      */
     #[ORM\Column(type: 'datetime')]
     private ?\DateTime $endDate;
 
-
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -73,14 +63,17 @@ class Event
     /**
      * Getter for start date.
      *
+     * @return \DateTime|null StartDate
      */
-    public function getStartDate(): ?DateTime
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
 
     /**
      * Setter for start date.
+     *
+     * @param \DateTime $startDate StartDate
      */
     public function setStartDate(\DateTime $startDate): void
     {
@@ -90,8 +83,9 @@ class Event
     /**
      * Getter for end date.
      *
+     * @return \DateTime|null EndDate
      */
-    public function getEndDate(): ?DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
@@ -99,6 +93,7 @@ class Event
     /**
      * Setter for end date.
      *
+     * @param \DateTime $endDate EndDate
      */
     public function setEndDate(\DateTime $endDate): void
     {
@@ -140,11 +135,8 @@ class Event
      *
      * @param Category|null $category Category
      */
-    public function setCategory(?Category $category): self
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
-        return $this;
     }
-
 }

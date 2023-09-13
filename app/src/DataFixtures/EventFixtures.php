@@ -6,9 +6,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\EventStatus;
 use App\Entity\Event;
-use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -36,14 +34,13 @@ class EventFixtures extends AbstractBaseFixtures implements DependentFixtureInte
             $event->setStartDate($this->faker->dateTime);
             $event->setEndDate($this->faker->dateTime);
 
-          //  $event->setStartDate(
-           //     DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+50 days'))
+            //  $event->setStartDate(
+            //     DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+50 days'))
 
-          //  );
-          //  $event->setEndDate(
-         //       DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+70 days'))
-          //  );
-
+            //  );
+            //  $event->setEndDate(
+            //       DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-10 days', '+70 days'))
+            //  );
 
             /** @var Category $category */
             $category = $this->getRandomReference('categories');

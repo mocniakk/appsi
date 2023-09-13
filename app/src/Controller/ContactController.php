@@ -35,7 +35,7 @@ class ContactController extends AbstractController
      * Constructor.
      *
      * @param ContactServiceInterface $contactService Contact service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(ContactServiceInterface $contactService, TranslatorInterface $translator)
     {
@@ -81,7 +81,7 @@ class ContactController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'contact_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'contact_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $contact = new Contact();
@@ -103,14 +103,14 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('contact_index');
         }
 
-        return $this->render('contact/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('contact/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Contact    $contact    Contact entity
+     * @param Contact $contact Contact entity
      *
      * @return Response HTTP response
      */
@@ -151,7 +151,7 @@ class ContactController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Contact    $contact    Contact entity
+     * @param Contact $contact Contact entity
      *
      * @return Response HTTP response
      */
@@ -187,6 +187,7 @@ class ContactController extends AbstractController
             ]
         );
     }
+
     /**
      * Get filters from request.
      *
@@ -204,4 +205,3 @@ class ContactController extends AbstractController
         return $filters;
     }
 }
-

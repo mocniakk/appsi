@@ -26,7 +26,6 @@ class CategoryFixtures extends AbstractBaseFixtures
             $category = new Category();
             $category->setTitle($this->faker->unique()->word);
 
-
             return $category;
         });
 

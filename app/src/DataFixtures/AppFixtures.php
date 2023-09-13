@@ -13,11 +13,12 @@ use Doctrine\Persistence\ObjectManager;
  *
  * @psalm-suppress MissingConstructor
  */
-
 class AppFixtures extends Fixture
 {
     /**
      * Load.
+     *
+     * @param ObjectManager $manager Manager
      *
      * @psalm-suppress PossiblyNullReference
      * @psalm-suppress UnusedClosureParam
