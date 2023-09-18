@@ -7,8 +7,8 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\Type\EventType;
-use App\Service\EventServiceInterface;
 use App\Repository\EventRepository;
+use App\Service\EventServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,9 +33,8 @@ class EventController extends AbstractController
 
     /**
      * Constructor.
-     *
      * @param EventServiceInterface $eventService Event service
-     * @param TranslatorInterface   $translator   Translator
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(EventServiceInterface $eventService, TranslatorInterface $translator)
     {
@@ -62,10 +61,11 @@ class EventController extends AbstractController
         return $this->render('event/index.html.twig', ['pagination' => $pagination]);
     }
 
+
     /**
      * Show action.
      *
-     * @param Event $event Event entity
+     * @param Event $event Event
      *
      * @return Response HTTP response
      */

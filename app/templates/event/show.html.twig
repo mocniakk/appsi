@@ -11,9 +11,9 @@
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ event.id }}</dd>
             <dt>{{ 'label.startDate'|trans }}</dt>
-            <dd>{{ event.startDate|date('Y/m/d') }}</dd>
+            <dd>{{ event.startDate|format_date('long') }}</dd>
             <dt>{{ 'label.endDate'|trans }}</dt>
-            <dd>{{ event.endDate|date('Y/m/d') }}</dd>
+            <dd>{{ event.endDate|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  event.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>

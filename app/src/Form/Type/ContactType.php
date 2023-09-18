@@ -5,11 +5,10 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class ContactType.
@@ -45,7 +44,12 @@ class ContactType extends AbstractType
                 'label' => 'label.phoneNumber',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Regex([
+                            'pattern' => '/^\d{9}$/',
+                            'message' => 'message.invalid_phoneNumber',
+            ])]]
         );
         $builder->add(
             'email',
@@ -54,18 +58,13 @@ class ContactType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 255],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Email([
+                        'message' => ('messages.invalid_email'),
+                            ])]
             ]
         );
-    }
-
-    /**
-     * Configures the options for this type.
-     *
-     * @param OptionsResolver $resolver The resolver for the options
-     */
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults(['data_class' => Contact::class]);
     }
 
     /**

@@ -22,8 +22,6 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
  * @extends ServiceEntityRepository<Event>
- *
- * @psalm-suppress LessSpecificImplementedReturnType
  */
 class EventRepository extends ServiceEntityRepository
 {

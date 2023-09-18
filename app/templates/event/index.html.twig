@@ -38,10 +38,14 @@
             {% for event in pagination.items %}
                 <tr>
                     <td>{{ event.id }}</td>
-                    <td>{{ event.startDate|date('Y/m/d') }}</td>
-                    <td>{{ event.endDate|date('Y/m/d') }}</td>
+                    <td>{{ event.startDate|format_date('long') }}</td>
+                    <td>{{ event.endDate|format_date('long') }}</td>
                     <td>{{ event.title }}</td>
-                    <td>{{ event.category.title }}</td>
+                    <td>
+                        <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
+                            {{ event.category.title }}
+                        </a>
+                    </td>
                     <td>
                         <a class="btn btn-outline-primary" href="{{ url('event_show', {id: event.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
@@ -55,15 +59,6 @@
                     </td>
                 </tr>
             {% endfor %}
-            <p>
-                {{ 'label.category_filter'|trans  ~ ':'}}
-                {% for event in pagination.items %}
-                    <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
-                    {{ event.category.title }}
-                    </a>
-                {% endfor %}
-            </p>
-
             <a href="{{ url('event_index') }}" title="{{ 'label.reset_filters'|trans }}">
                 {{ 'label.reset_filters'|trans }}
             </a>

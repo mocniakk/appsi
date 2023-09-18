@@ -35,8 +35,8 @@
         {% for event in events %}
             <tr>
                 <td>{{ event.id }}</td>
-                <td>{{ event.startDate|date('Y/m/d') }}</td>
-                <td>{{ event.endDate|date('Y/m/d') }}</td>
+                <td>{{ event.startDate|format_date('long') }}</td>
+                <td>{{ event.endDate|format_date('long') }}</td>
                 <td>{{ event.title }}</td>
                 <td>{{ event.category.title }}</td>
                 <td>
@@ -52,23 +52,6 @@
                 </td>
             </tr>
         {% endfor %}
-        <p>
-            {{ 'label.category_filter'|trans  ~ ':'}}
-            {% for event in pagination.items %}
-                <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
-                    {{ event.category.title }}
-                </a>
-            {% endfor %}
-        </p>
-
-        <a href="{{ url('event_index') }}" title="{{ 'label.reset_filters'|trans }}">
-            {{ 'label.reset_filters'|trans }}
-        </a>
         </tbody>
     </table>
-    <p>
-        <a class="btn btn-primary" href="{{ url('event_index') }}" title="{{ 'action.back_to_list'|trans }}">
-            {{ 'action.back_to_list'|trans }}
-        </a>
-    </p>
 {% endblock %}

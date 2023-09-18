@@ -238,6 +238,18 @@
         <source>title.ongoing_events</source>
         <target>Aktualne wydarzenia</target>
       </trans-unit>
+      <trans-unit id="message.invalid_phoneNumber">
+        <source>message.invalid_phoneNumber</source>
+        <target>Numer telefonu powinien składać się z 9 cyfr.</target>
+      </trans-unit>
+      <trans-unit id="message.invalid_email">
+        <source>message.invalid_email</source>
+        <target>Niepoprawny adres email.</target>
+      </trans-unit>
+      <trans-unit id="message.record_not_found">
+        <source>message.record_not_found</source>
+        <target>Nie znaleziono rekordu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -17,11 +17,6 @@ use Knp\Component\Pager\PaginatorInterface;
 class EventService implements EventServiceInterface
 {
     /**
-     * Category service.
-     */
-    private CategoryServiceInterface $categoryService;
-
-    /**
      * Event repository.
      */
     private EventRepository $eventRepository;
@@ -44,6 +39,11 @@ class EventService implements EventServiceInterface
         $this->eventRepository = $eventRepository;
         $this->paginator = $paginator;
     }
+
+    /**
+     * Category service.
+     */
+    private CategoryServiceInterface $categoryService;
 
     /**
      * Get paginated list.

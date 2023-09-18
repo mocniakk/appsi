@@ -36,13 +36,4 @@ interface EventServiceInterface
      * @param Event $event Event entity
      */
     public function delete(Event $event): void;
-
-    /**
-     * Prepare filters for the events list.
-     *
-     * @param array<string, int> $filters Raw filters from request
-     *
-     * @return array<string, object> Result array of filters
-     */
-    public function prepareFilters(array $filters): array;
 }

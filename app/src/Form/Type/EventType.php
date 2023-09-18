@@ -7,12 +7,13 @@ namespace App\Form\Type;
 
 use App\Entity\Event;
 use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 /**
  * Class EventType.
@@ -57,7 +58,7 @@ class EventType extends AbstractType
         );
         $builder->add(
             'startDate',
-            DateTimeType::class,
+            DateType::class,
             [
                 'label' => 'label.startDate',
                 'required' => true,
@@ -66,7 +67,7 @@ class EventType extends AbstractType
         );
         $builder->add(
             'endDate',
-            DateTimeType::class,
+            DateType::class,
             [
                 'label' => 'label.endDate',
                 'required' => true,
@@ -80,7 +81,7 @@ class EventType extends AbstractType
      *
      * @param OptionsResolver $resolver The resolver for the options
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => Event::class]);
     }

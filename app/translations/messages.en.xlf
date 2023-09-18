@@ -238,6 +238,14 @@
         <source>title.ongoing_events</source>
         <target>Ongoing events</target>
       </trans-unit>
+      <trans-unit id="message.invalid_phoneNumber">
+        <source>message.invalid_phoneNumber</source>
+        <target>Phone number should have 9 digits.</target>
+      </trans-unit>
+      <trans-unit id="message.invalid_email">
+        <source>message.invalid_email</source>
+        <target>Invalid email.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

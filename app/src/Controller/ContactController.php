@@ -53,7 +53,6 @@ class ContactController extends AbstractController
     #[Route(name: 'contact_index', methods: 'GET')]
     public function index(Request $request): Response
     {
-        $filters = $this->getFilters($request);
         $pagination = $this->contactService->getPaginatedList(
             $request->query->getInt('page', 1)
         );
@@ -186,22 +185,5 @@ class ContactController extends AbstractController
                 'contact' => $contact,
             ]
         );
-    }
-
-    /**
-     * Get filters from request.
-     *
-     * @param Request $request HTTP request
-     *
-     * @return array<string, int> Array of filters
-     *
-     * @psalm-return array{category_id: int, tag_id: int, status_id: int}
-     */
-    private function getFilters(Request $request): array
-    {
-        $filters = [];
-        $filters['category_id'] = $request->query->getInt('filters_category_id');
-
-        return $filters;
     }
 }
